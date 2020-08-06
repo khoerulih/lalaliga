@@ -1,83 +1,64 @@
-const CACHE_NAME = "ligacache-v1.0";
-var urlsToCache = [
-  "/",
-  "/index.html",
-  "/detail-team.html",
-  "/manifest.json",
-  "/common/nav.html",
-  "/common/pages/favourite.html",
-  "/common/pages/home.html",
-  "/common/pages/match.html",
-  "/common/pages/scorers.html",
-  "/css/materialize.min.css",
-  "/css/style.css",
-  "/images/laliga-icon.png",
-  "/images/laliga-logo-white.png",
-  "/images/LaLiga.svg",
-  "/images/icons/icon-72x72.png",
-  "/images/icons/icon-96x96.png",
-  "/images/icons/icon-128x128.png",
-  "/images/icons/icon-144x144.png",
-  "/images/icons/icon-152x152.png",
-  "/images/icons/icon-192x192.png",
-  "/images/icons/icon-384x384.png",
-  "/images/icons/icon-512x512.png",
-  "/js/component/detail-nav.js",
-  "/js/component/nav.js",
-  "/js/component/fab.js",
-  "/js/component/preloader.js",
-  "/js/data/api.js",
-  "/js/data/cache.js",
-  "/js/data/db.js",
-  "/js/loader/detailteam-loader.js",
-  "/js/loader/match-loader.js",
-  "/js/loader/page-loader.js",
-  "/js/loader/scorer-loader.js",
-  "/js/loader/standings-loader.js",
-  "/js/loader/favourite-loader.js",
-  "/js/app.js",
-  "/js/app-detail.js",
-  "/js/materialize.min.js",
-  "/js/idb.js",
-  "/js/reg-sw.js",
-  "https://fonts.googleapis.com/icon?family=Material+Icons"
-];
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
+if (workbox){
+  console.log('Workbox activated');
+} else {
+  console.log('Workbox fail to activated');
+}
 
-self.addEventListener("install", function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
+workbox.precaching.precacheAndRoute([
+  { url: '/common/nav.html', revision: '1' },
+  { url: '/css/materialize.min.css', revision: '1' },
+  { url: '/css/style.css', revision: '1' },
+  { url: '/js/idb.js', revision: '1' },
+  { url: '/js/app.js', revision: '1' },
+  { url: '/js/app-detail.js', revision: '1' },
+  { url: '/js/materialize.min.js', revision: '1'},
+  { url: '/index.html', revision: '1' },
+  { url: '/detail-team.html', revision: '1' },
+  { url: '/manifest.json', revision: '1' }
+]);
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      });
-    })
-  );
-});
+workbox.routing.registerRoute(
+  new RegExp('/common/pages/'),
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'pages-cache'
+  })
+);
 
-self.addEventListener("activate", function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName != CACHE_NAME) {
-            console.log(`ServiceWorker: cache ${cacheName} telah dihapus`);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+workbox.routing.registerRoute(
+  new RegExp('/images/'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'images-icon-cache'
+  })
+);
+
+workbox.routing.registerRoute(
+  new RegExp('/js/'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'js-cache'
+  })
+);
+
+workbox.routing.registerRoute(
+  /^https:\/\/fonts\.googleapis\.com\/icon?family=Material+Icons/,
+  workbox.strategies.cacheFirst({
+    cacheName: 'material-icon-cache'
+  })
+);
+
+workbox.routing.registerRoute(
+  /^https:\/\/api\.football-data\.org/,
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'api-cache'
+  })
+);
+
+workbox.routing.registerRoute(
+  /^https:\/\/upload\.wikimedia\.org/,
+  workbox.strategies.staleWhileRevalidate({
+      cacheName: 'club-cache'
+  })
+);
 
 self.addEventListener('push', function(event) {
   var body;
