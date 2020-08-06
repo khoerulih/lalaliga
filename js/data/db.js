@@ -8,8 +8,7 @@ const dbPromised = idb.open("lalaliga", 1, (upgradeDb) => {
 });
 
 const addToFavourite = (info, scheduled, finished) => {
-  dbPromised
-    .then((db) => {
+  dbPromised.then((db) => {
       let tx = db.transaction("team", "readwrite");
       let store = tx.objectStore("team");
       let item = {
@@ -23,19 +22,18 @@ const addToFavourite = (info, scheduled, finished) => {
     })
     .then(() => {
       console.log('Data berhasil disimpan');
-      M.toast({html: 'Success', classes: 'rounded'});
+      M.toast({html: `${info.name} has been added to your favourite team`, classes: 'rounded'});
     })
     .catch((error) => {
       console.log('Data gagal disimpan');
       console.log(error);
-      M.toast({html: 'Failed', classes: 'rounded'});
+      M.toast({html: 'Failed add team to favourite', classes: 'rounded'});
     })
 }
 
 const getAll = () => {
   return new Promise((resolve) => {
-    dbPromised
-      .then((db) => {
+    dbPromised.then((db) => {
         let tx = db.transaction("team", "readonly");
         let store = tx.objectStore("team");
         return store.getAll();
@@ -48,8 +46,7 @@ const getAll = () => {
 
 const getById = (id) => {
   return new Promise((resolve) => {
-    dbPromised
-      .then((db) => {
+    dbPromised.then((db) => {
         let tx = db.transaction("team", "readonly");
         let store = tx.objectStore("team");
         return store.get(id);
@@ -69,8 +66,13 @@ const deleteFavourite = (id) => {
     return tx.complete;
   })
   .then(() => {
-    console.log("Item deleted");
-    M.toast({html: 'Item Deleted', classes: 'rounded'});
+    console.log("Success delete item");
+    M.toast({html: 'Item has been deleted', classes: 'rounded'});
+  })
+  .catch((error) => {
+    console.log('Failed delete item');
+    console.log(error);
+    M.toast({html: 'Failed delete team from favourite', classes: 'rounded'});
   })
 }
 

@@ -22,7 +22,6 @@ class Fab{
 
     btnFav.onclick = () => {
       console.log("Button fav diklik");
-      M.toast({html: 'Adding To Favourite...', classes: 'rounded'});
       db.addToFavourite(
         detailTeam,
         scheduledMatch,
@@ -35,7 +34,6 @@ class Fab{
     let btnDelete = document.getElementById("delete");
     btnDelete.onclick = () => {
       console.log("Button delete di klik");
-      M.toast({html: 'Deleting Item...', classes: 'rounded'});
       db.deleteFavourite(id);
       location.href = `../../#favourite`;
     }
