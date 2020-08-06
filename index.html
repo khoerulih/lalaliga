@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#212121 ">
+  <title>La Liga</title>
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon"  type="image/png" href="/images/icons/icon-512x512.png">
+  <link rel="apple-touch-icon" href="/images/icons/icon-512x512.png">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <nav class="grey darken-4">
+    <div class="nav-wrapper container">
+      <a href="#home" class="brand-logo"><img src="images/laliga-logo-white.png" alt=""></a>
+      <a href="#" class="sidenav-trigger" data-target="nav-mobile"><i class="material-icons">menu</i></a>
+      <ul class="topnav right hide-on-med-and-down"></ul>
+      <ul class="sidenav" id="nav-mobile"></ul>
+    </div>
+  </nav>
+
+  <div class="preloader">
+    <div class="preloader-wrapper active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="content"></div>
+
+  <script src="js/materialize.min.js"></script>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>

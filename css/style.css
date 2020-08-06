@@ -1,0 +1,91 @@
+.nav-wrapper .brand-logo img {
+  height: 64px;
+}
+
+.club-logo-standings{
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+
+.club-logo{
+  width: 400px;
+  height: 400px;
+}
+
+.message{
+  color: grey;
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.link-detail{
+  color: black;
+  font-weight: 300;
+}
+
+.card{
+  height: auto;
+}
+
+.card-image{
+  height: auto; /* Your height here */
+  overflow: hidden;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+  color: #f50057 ;
+}
+
+.tabs {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 48px;
+  width: 100%;
+  background-color: #000;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+.tabs .tab a{
+  color:#FFF;
+}
+
+.tabs .tab a:hover {
+  background-color:#fff;
+  color:#000;
+} 
+
+.tabs .tab a.active {
+  background-color:#000;
+  color:#FFF;
+}
+
+.tabs .indicator {
+  background-color:#FFF;
+}
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.preloader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+}
+
+@media (max-width: 600px) {
+  .nav-wrapper .brand-logo img {
+    height: 56px;
+  }
+}
