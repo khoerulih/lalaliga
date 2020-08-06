@@ -13,7 +13,7 @@ const getFavouritedTeam = () => {
           <div class="col s12 l6">
             <div class="card hoverable">
               <div class="card-image">
-                <a href="./detail-team.html?id=${team.info_team.id}&saved=true"><img class="club-logo" src="${urlLogo}"></a>
+                <a href="./detail-team.html?id=${team.info_team.id}&saved=true"><img class="club-logo" src="${urlLogo}" onerror="this.src='/images/laliga-icon.png'"></a>
               </div>
               <div class="card-content">
                 <span class="card-title">${team.info_team.name}</span>

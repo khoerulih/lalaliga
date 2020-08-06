@@ -98,7 +98,7 @@ const getInfo = (data) => {
       <h2 class="header center-align">${data.name}</h2>
       <div class="card horizontal hide-on-med-and-down">
         <div class="card-image valign-wrapper">
-          <img class="center-align" src="${urlLogo}" alt="${data.name}">
+          <img class="center-align" src="${urlLogo}" alt="${data.name}" onerror="this.src='/images/laliga-icon.png'">
         </div>
         <div class="card-stacked">
           <div class="card-content">
@@ -142,7 +142,7 @@ const getInfoMobile = (data) => {
       <h2 class="header center-align">${data.name}</h2>
       <div class="card">
         <div class="card-image valign-wrapper">
-          <img class="center-align" src="${urlLogo}" alt="${data.name}">
+          <img class="center-align" src="${urlLogo}" alt="${data.name}" onerror="/images/laliga-icon.png">
         </div>
         <div class="card-stacked">
           <div class="card-content">

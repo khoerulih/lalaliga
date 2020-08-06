@@ -34,7 +34,7 @@ const getTable = (data) => {
       standingsTableHTML += `
       <tr>
         <td>${datas.position}</td> 
-        <td><a href="./detail-team.html?id=${datas.team.id}" class="link-detail"><img class="club-logo-standings" src="${urlLogo}" alt="" width="24px"> ${datas.team.name}</a></td>
+        <td><a href="./detail-team.html?id=${datas.team.id}" class="link-detail"><img class="club-logo-standings" src="${urlLogo}" width="24px" onerror="this.src='/images/laliga-icon.png'"> ${datas.team.name}</a></td>
         <td>${datas.playedGames}</td>
         <td>${datas.points}</td>
         <td>${datas.won}</td>

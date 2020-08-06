@@ -11,6 +11,7 @@ var urlsToCache = [
   "/common/pages/scorers.html",
   "/css/materialize.min.css",
   "/css/style.css",
+  "/images/laliga-icon.png",
   "/images/laliga-logo-white.png",
   "/images/LaLiga.svg",
   "/images/icons/icon-72x72.png",
@@ -50,25 +51,17 @@ self.addEventListener("install", function(event) {
   );
 });
 
-self.addEventListener("fetch", function(event) {
-  let base_url = "https://api.football-data.org/v2";
-  
-  if(event.request.url.indexOf(base_url) > -1){
-    event.respondWith(
-      caches.open(CACHE_NAME).then((cache) => {
-        return fetch(event.request).then((response) => {
-          cache.put(event.request.url, response.clone());
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
           return response;
-        })
-      })
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request, {ignoreSearch: true}).then((response) => {
-        return response || fetch (event.request);
-      })
-    )
-  }
+        });
+      });
+    })
+  );
 });
 
 self.addEventListener("activate", function(event) {
