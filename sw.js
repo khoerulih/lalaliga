@@ -16,7 +16,9 @@ workbox.precaching.precacheAndRoute([
   { url: '/index.html', revision: '1' },
   { url: '/detail-team.html', revision: '1' },
   { url: '/manifest.json', revision: '1' }
-]);
+],{
+  ignoreUrlParametersMatching: [/.*/]
+});
 
 workbox.routing.registerRoute(
   new RegExp('/common/pages/'),
